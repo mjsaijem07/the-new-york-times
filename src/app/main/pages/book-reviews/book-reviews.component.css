@@ -1,0 +1,31 @@
+.example-card {
+    width: 100%;
+    padding: 0, 10px;
+}
+  
+.example-header-image {
+background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+background-size: cover;
+}
+img.dp {
+    max-height: 230px;
+    object-fit: cover;
+}
+.search-area {
+    position: relative;
+}
+.search-result {
+    max-height: 310px;
+    background: #ffffff;
+    border: solid 1px #efefef;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    max-width: 660px;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    z-index: 1;
+    overflow: auto;
+    box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+}

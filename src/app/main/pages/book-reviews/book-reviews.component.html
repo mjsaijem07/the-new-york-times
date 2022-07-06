@@ -1,0 +1,50 @@
+<app-loading *ngIf="isLoading"></app-loading>
+
+<div class="container mt-5">
+    <div class="search-area d-flex align-items-center justify-content-end" style="gap: 10px;">
+        <mat-form-field class="example-form-field" appearance="fill">
+            <mat-label>Search isbn</mat-label>
+            <input matInput type="text" [(ngModel)]="isbn" (ngModelChange)="searchIsbn($event)">
+            <button *ngIf="isbn" matSuffix mat-icon-button aria-label="Clear" (click)="isbn = ''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field class="example-form-field" appearance="fill">
+            <mat-label>Search title</mat-label>
+            <input matInput type="text" [(ngModel)]="title" (ngModelChange)="searchTitle($event)">
+            <button *ngIf="title" matSuffix mat-icon-button aria-label="Clear" (click)="title = ''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field class="example-form-field" appearance="fill">
+            <mat-label>Search author</mat-label>
+            <input matInput type="text" [(ngModel)]="author" (ngModelChange)="searchAuthor($event)">
+            <button *ngIf="author" matSuffix mat-icon-button aria-label="Clear" (click)="author = ''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <div *ngIf="isbn != '' || title != '' || author != ''" class="search-result">
+            <div class="item pointer" *ngFor="let item of search_result">{{item?.book_title}} by {{item?.book_author}}</div>
+            <div *ngIf="search_result?.length < 1" class="text-center"> No result found</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-12 mb-5" *ngFor="let item of books">
+            <mat-card class="example-card pointer">
+                <mat-card-header>
+                <mat-card-title>{{item?.book_details[0]?.title}}</mat-card-title>
+                <mat-card-subtitle>Author: {{item?.book_details[0]?.author}}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image class="dp" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+                <mat-card-content>
+                    <small class="published-date">Published date: {{item?.published_date | date:'mediumDate'}}</small>
+                <p>{{item?.book_details[0]?.description?.slice(0, 200)}}.. <a href="/movie-reviews" >Read more</a></p>
+                </mat-card-content>
+                <!--mat-card-actions>
+                <button mat-button>LIKE</button>
+                <button mat-button>SHARE</button>
+                </mat-card-actions-->
+            </mat-card>
+        </div>
+    </div>
+</div>

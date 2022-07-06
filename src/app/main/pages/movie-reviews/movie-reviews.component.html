@@ -1,0 +1,53 @@
+<app-loading *ngIf="isLoading"></app-loading>
+
+<div class="container mt-5">
+    <div class="d-flex align-items-center justify-content-end" style="gap: 10px;">
+        <button mat-raised-button color="primary" (click)="clear()">Clear</button>
+        <div class="search-area">
+            <mat-form-field appearance="fill">
+                <mat-label>Sort by</mat-label>
+                <mat-select (selectionChange)="sorting($event)">
+                    <mat-option *ngFor="let item of sortType" [value]="item">
+                    {{item}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div *ngIf="sortingResult?.length >= 1" class="search-result">
+                <div class="item pointer" *ngFor="let item of sortingResult">{{item?.display_title}}</div>
+            </div>
+        </div>
+        <div class="search-area">
+            <mat-form-field class="example-form-field" appearance="fill">
+                <mat-label>Enter reviewer name</mat-label>
+                <input matInput type="text" [(ngModel)]="reviewer" (ngModelChange)="searchReviewer($event)" (focus)="searchReviewerFocus($event)" (focusout)="searchReviewerFocusOut($event)">
+                <button *ngIf="reviewer" matSuffix mat-icon-button aria-label="Clear" (click)="clear()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+            <div *ngIf="searchReviewOFocus" class="search-result">
+                <div class="item pointer" *ngFor="let item of reviewerList">{{item?.display_name}}</div>
+                <div *ngIf="reviewerList?.length < 1" class="text-center"> No result found</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-12 mb-5" *ngFor="let item of reviews">
+            <mat-card class="example-card pointer">
+                <mat-card-header>
+                    <!-- <img mat-card-avatar  class="example-header-image" [src]="item?.multimedia?.resource?.src" alt="pic" onError="this.src='https://material.angular.io/assets/img/examples/shiba1.jpg'"> -->
+                    <mat-card-title>{{item?.display_title}}</mat-card-title>
+                    <mat-card-subtitle>byline: {{item?.byline}}</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image class="dp" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+                <mat-card-content>
+                    <small class="published-date">Publication date: {{item?.publication_date}}</small>
+                <p>{{item?.summary_short?.slice(0, 200)}}.. <a href="/movie-reviews" >Read more</a></p>
+                </mat-card-content>
+                <!--mat-card-actions>
+                <button mat-button>LIKE</button>
+                <button mat-button>SHARE</button>
+                </mat-card-actions-->
+            </mat-card>
+        </div>
+    </div>
+</div>
